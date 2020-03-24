@@ -147,7 +147,7 @@ class Host(object):
             parity=serial.PARITY_EVEN,
             stopbits=serial.STOPBITS_ONE
         )
-
+    
         while ser.isOpen() and self.running:
 
             # basic message   0      1     2      3      4      5     6         7
@@ -162,7 +162,7 @@ class Host(object):
                 msg[4] |= 0x20
 
             # Set the checksum
-            for byte in xrange(1, 6):
+            for byte in range(1, 6):
                 msg[7] ^= msg[byte]
 
 
