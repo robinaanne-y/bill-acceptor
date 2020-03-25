@@ -142,12 +142,10 @@ class Host(object):
 
         ser = serial.Serial(
             port=portname,
-            baudrate=19200,
+            baudrate=9600,
             bytesize=serial.SEVENBITS,
             parity=serial.PARITY_EVEN,
-            stopbits=serial.STOPBITS_ONE,
-            rtscts=1,
-            dsrdtr=1
+            stopbits=serial.STOPBITS_ONE
         )
     
         while ser.isOpen() and self.running:
