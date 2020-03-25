@@ -165,21 +165,21 @@ class Host(object):
             for byte in range(1, 6):
                 msg[7] ^= msg[byte]
 
-
             ser.write(msg)
             time.sleep(0.1)
 
             out = ''
             while ser.inWaiting() > 0:
-                out += ser.read(1)
+                out += str(ser.read(1))
             if out == '':
                 continue
 
-
+            # print(ord(out[3]))
             # With the exception of Stacked and Returned, only we can
             # only be in one state at once
             try:
                 status = Host.state_dict[ord(out[3])]
+                print('status', status)
             except KeyError:
                 status = ''
                 print("unknown state dic key {:d}".format(ord(out[3])))
@@ -208,13 +208,13 @@ class Host(object):
 
             # Print credit(s)
             credit = (ord(out[5]) & 0x38) >> 3
-
+            
             if credit != 0:
                 if ord(out[3]) & 0x10:
                     print("Bill credited: Bill#", credit)
                     self.bill_count[credit] += 1
                     print("Acceptor now holds: {:s}".format(
-                        binascii.hexlify(self.bill_count)))
+                        str(binascii.hexlify(self.bill_count))))
 
             time.sleep(POLL_RATE)
 
