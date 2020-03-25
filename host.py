@@ -145,7 +145,9 @@ class Host(object):
             baudrate=19200,
             bytesize=serial.SEVENBITS,
             parity=serial.PARITY_EVEN,
-            stopbits=serial.STOPBITS_ONE
+            stopbits=serial.STOPBITS_ONE,
+            rtscts=1,
+            dsrdtr=1
         )
     
         while ser.isOpen() and self.running:
